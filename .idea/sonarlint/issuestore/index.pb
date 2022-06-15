@@ -24,8 +24,6 @@ r
 Bapp/src/main/java/com/tmd/talkies/view/detail/DetailNavigator.java,f\9\f903d77fd438c41e377a99eb7d836f3a28484016
 n
 >app/src/main/java/com/tmd/talkies/view/main/MainNavigator.java,8\3\83b5d38dfe0dbc09720398d649e574e9ba8a3c07
-m
-=app/src/main/java/com/tmd/talkies/view/base/BaseActivity.java,c\5\c5ce56166be41a8d46d5ed94f2a5c246c434d8d9
 g
 7app/src/main/java/com/tmd/talkies/utils/SpaceUtils.java,3\3\337ececfa7a8cfb0e3e0b842bac1a1635bad377a
 u
@@ -36,8 +34,6 @@ i
 9app/src/main/java/com/tmd/talkies/utils/AppConstants.java,f\9\f92fb32c63a2002474c3c31e7c6bf6dc7c1b4e80
 F
 app/proguard-rules.pro,9\e\9e08934d811afe28fbc77aaa3c0d747b94348db9
-i
-9app/src/main/java/com/tmd/talkies/utils/NetworkUtils.java,8\b\8b1ea20118f30faffc362b64f38f25110fa3d488
 A
 gradle.properties,2\a\2afbb999f001938c88fa43fc2ef52abf0f8213e4
 X

@@ -26,7 +26,7 @@ public class Movie implements Serializable
 
     private final static long serialVersionUID = 6066640457821319729L;
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
@@ -63,5 +63,16 @@ public class Movie implements Serializable
 
     public void setVoteAverage(Double voteAverage) {
         this.voteAverage = voteAverage;
+    }
+
+    @Override
+    public String toString() {
+        return "Movie{" +
+                "id=" + id +
+                ", posterPath='" + posterPath + '\'' +
+                ", voteAverage=" + voteAverage +
+                ", releaseDate='" + releaseDate + '\'' +
+                ", title='" + title + '\'' +
+                '}';
     }
 }

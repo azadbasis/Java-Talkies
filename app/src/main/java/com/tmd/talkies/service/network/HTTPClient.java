@@ -7,8 +7,10 @@ import com.tmd.talkies.service.model.MovieResponse;
 
 import io.reactivex.rxjava3.core.Single;
 import okhttp3.HttpUrl;
+import okhttp3.Interceptor;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
+import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava3.RxJava3CallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
@@ -38,7 +40,7 @@ public class HTTPClient {
             // Create retrofit instance
             Retrofit retrofit = new Retrofit.Builder()
                     .baseUrl(TMDB_BASE_URL)
-                    .client(client.build())
+                    .client(getHttpClientBuilder())
                     // Add Gson converter
                     .addConverterFactory(GsonConverterFactory.create())
                     // Add RxJava support for Retrofit
@@ -54,4 +56,19 @@ public class HTTPClient {
         @GET("movie/popular")
         Single<MovieResponse> getMoviesByPage(@Query("page") int page);
     }
+    public static OkHttpClient getHttpClientBuilder() {
+        HttpLoggingInterceptor loggingInterceptor = new HttpLoggingInterceptor()
+                .setLevel(HttpLoggingInterceptor.Level.BODY);
+        Interceptor clientInterceptor = chain -> {
+            Request request = chain.request();
+            HttpUrl url = request.url().newBuilder().addQueryParameter("api_key", TMDB_API_KEY).build();
+            request = request.newBuilder().url(url).build();
+            return chain.proceed(request);
+        };
+        return new OkHttpClient.Builder()
+                .addNetworkInterceptor(clientInterceptor)
+                .addInterceptor(loggingInterceptor)
+                .build();
+    }
+
 }
