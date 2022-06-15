@@ -11,8 +11,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 
 import com.tmd.talkies.databinding.ActivityMainBinding;
+import com.tmd.talkies.service.model.MovieResponse;
 import com.tmd.talkies.service.model.Movie;
-import com.tmd.talkies.service.model.Result;
 import com.tmd.talkies.service.network.Resource;
 import com.tmd.talkies.utils.SpaceUtils;
 import com.tmd.talkies.view.base.BaseActivity;
@@ -48,17 +48,17 @@ public class MainActivity extends BaseActivity<ActivityMainBinding> implements M
     }
 
     private void observeViewModel() {
-        viewModel.getTopRatedMovie("en-US",1).observe(this, new Observer<Resource<Movie>>() {
+        viewModel.getTopRatedMovie("en-US",1).observe(this, new Observer<Resource<MovieResponse>>() {
             @Override
-            public void onChanged(Resource<Movie> topMovieResource) {
+            public void onChanged(Resource<MovieResponse> topMovieResource) {
                 binding.progressBar.setVisibility(View.VISIBLE);
                 if (topMovieResource!=null){
                     switch (topMovieResource.status){
                         case SUCCESS:
-                            Movie movie=topMovieResource.data;
-                            List<Result> topovies = movie.getResults();
+                            MovieResponse movieResponse =topMovieResource.data;
+                            List<Movie> topovies = movieResponse.getResults();
                             movieAdapter.setItems(topovies);
-                            Log.d(TAG, "topMovie: "+movie.getResults().size());
+                            Log.d(TAG, "topMovie: "+ movieResponse.getResults().size());
                             onSuccess("success");
                             binding.progressBar.setVisibility(View.GONE);
                             break;
@@ -91,6 +91,6 @@ public class MainActivity extends BaseActivity<ActivityMainBinding> implements M
     }
 
     @Override
-    public void onMovieClicked(Result movie) {
+    public void onMovieClicked(Movie movie) {
     }
 }

@@ -4,7 +4,7 @@ import android.content.Context;
 
 import androidx.lifecycle.MutableLiveData;
 
-import com.tmd.talkies.service.model.Movie;
+import com.tmd.talkies.service.model.MovieResponse;
 import com.tmd.talkies.service.network.ApiClient;
 import com.tmd.talkies.service.network.ApiServices;
 import com.tmd.talkies.service.network.Resource;
@@ -21,7 +21,7 @@ public class MovieRepositoryImpl implements IMovieRepository {
     private static MovieRepositoryImpl instance;
     private static Context mContext;
     private static ApiServices apiServices;
-    private MutableLiveData<Resource<Movie>> resourceMutableLiveData;
+    private MutableLiveData<Resource<MovieResponse>> resourceMutableLiveData;
 
     private MovieRepositoryImpl() {
     }
@@ -36,15 +36,15 @@ public class MovieRepositoryImpl implements IMovieRepository {
     }
 
     @Override
-    public MutableLiveData<Resource<Movie>> getTopRatedMovie(String language, int pageNumber) {
+    public MutableLiveData<Resource<MovieResponse>> getTopRatedMovie(String language, int pageNumber) {
         if (resourceMutableLiveData == null) {
             resourceMutableLiveData = new MutableLiveData<>();
         }
         resourceMutableLiveData.setValue(null);
-        Call<Movie> call = apiServices.getTopRatedMovie(language, pageNumber);
-        call.enqueue(new Callback<Movie>() {
+        Call<MovieResponse> call = apiServices.getTopRatedMovie(language, pageNumber);
+        call.enqueue(new Callback<MovieResponse>() {
             @Override
-            public void onResponse(Call<Movie> call, Response<Movie> response) {
+            public void onResponse(Call<MovieResponse> call, Response<MovieResponse> response) {
                 if (response.isSuccessful()) {
                     resourceMutableLiveData.postValue(Resource.success(response.body()));
                 } else {
@@ -53,7 +53,7 @@ public class MovieRepositoryImpl implements IMovieRepository {
                 }
             }
             @Override
-            public void onFailure(Call<Movie> call, Throwable t) {
+            public void onFailure(Call<MovieResponse> call, Throwable t) {
                 resourceMutableLiveData.postValue(Resource.error(t.getMessage(), null, 0));
 
             }

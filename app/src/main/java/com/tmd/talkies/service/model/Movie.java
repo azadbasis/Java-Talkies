@@ -1,60 +1,67 @@
 package com.tmd.talkies.service.model;
 
-
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
-import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
 
+import java.io.Serializable;
 
 public class Movie implements Serializable
 {
 
-    @SerializedName("page")
+    @SerializedName("id")
     @Expose
-    private int page;
-    @SerializedName("results")
+    private int id;
+    @SerializedName("poster_path")
     @Expose
-    private List<Result> results = new ArrayList<Result>();
-    @SerializedName("total_pages")
+    private String posterPath;
+    @SerializedName("vote_average")
     @Expose
-    private int totalPages;
-    @SerializedName("total_results")
+    private Double voteAverage;
+    @SerializedName("release_date")
     @Expose
-    private int totalResults;
-    private final static long serialVersionUID = -233778321484295006L;
+    private String releaseDate;
+    @SerializedName("title")
+    @Expose
+    private String title;
 
-    public int getPage() {
-        return page;
+    private final static long serialVersionUID = 6066640457821319729L;
+
+    public int getId() {
+        return id;
     }
 
-    public void setPage(int page) {
-        this.page = page;
+    public void setId(int id) {
+        this.id = id;
+    }
+    public String getPosterPath() {
+        return posterPath;
     }
 
-    public List<Result> getResults() {
-        return results;
+    public void setPosterPath(String posterPath) {
+        this.posterPath = posterPath;
     }
 
-    public void setResults(List<Result> results) {
-        this.results = results;
+    public String getReleaseDate() {
+        return releaseDate;
     }
 
-    public int getTotalPages() {
-        return totalPages;
+    public void setReleaseDate(String releaseDate) {
+        this.releaseDate = releaseDate;
     }
 
-    public void setTotalPages(int totalPages) {
-        this.totalPages = totalPages;
+    public String getTitle() {
+        return title;
     }
 
-    public int getTotalResults() {
-        return totalResults;
+    public void setTitle(String title) {
+        this.title = title;
     }
 
-    public void setTotalResults(int totalResults) {
-        this.totalResults = totalResults;
+    public Double getVoteAverage() {
+        return voteAverage;
     }
 
+    public void setVoteAverage(Double voteAverage) {
+        this.voteAverage = voteAverage;
+    }
 }

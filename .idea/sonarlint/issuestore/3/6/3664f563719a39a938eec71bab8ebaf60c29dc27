@@ -1,7 +1,0 @@
-
-m
-java:S1450"WRemove the "mContext" field and declare it as a local variable in the relevant methods.(ºñÙ’
-B
-java:S1068"'Remove this unused "TAG" private field.(¬’¸üùÿÿÿÿ
-B
-java:S1068",Remove this unused "mContext" private field.(ºñÙ’

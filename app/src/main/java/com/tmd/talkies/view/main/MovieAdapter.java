@@ -11,7 +11,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 
 import com.tmd.talkies.databinding.ItemMovieBinding;
-import com.tmd.talkies.service.model.Result;
+import com.tmd.talkies.service.model.Movie;
 import com.bumptech.glide.Glide;
 
 import java.util.ArrayList;
@@ -23,10 +23,10 @@ import java.util.List;
 public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieViewHolder> {
 
     public interface MovieListener {
-        void onMovieClicked(Result movie);
+        void onMovieClicked(Movie movie);
     }
 
-    private List<Result> items;
+    private List<Movie> items;
     private final MovieListener listener;
 
     public MovieAdapter(MovieListener listener) {
@@ -34,7 +34,7 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieViewHol
         items = new ArrayList<>();
     }
 
-    public void setItems(List<Result> items) {
+    public void setItems(List<Movie> items) {
         this.items = items;
         notifyDataSetChanged();
     }
@@ -55,7 +55,7 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieViewHol
         return items.size();
     }
 
-    private Result getItem(int position) {
+    private Movie getItem(int position) {
         return items.get(position);
     }
 
@@ -68,7 +68,7 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieViewHol
         }
 
         void bind(int position) {
-            Result movie = getItem(position);
+            Movie movie = getItem(position);
             setClickListener(movie);
             setTitle(movie.getTitle());
             setImage(CDN_URL+movie.getPosterPath());
@@ -87,14 +87,14 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieViewHol
             binding.releaseDate.setText(releaseDate);
         }
 
-        private void setClickListener(Result movie) {
+        private void setClickListener(Movie movie) {
             itemView.setTag(movie);
             itemView.setOnClickListener(this);
         }
 
         @Override
         public void onClick(View view) {
-            listener.onMovieClicked((Result) view.getTag());
+            listener.onMovieClicked((Movie) view.getTag());
         }
     }
 }

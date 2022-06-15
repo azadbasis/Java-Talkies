@@ -6,7 +6,7 @@ import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 
-import com.tmd.talkies.service.model.Movie;
+import com.tmd.talkies.service.model.MovieResponse;
 import com.tmd.talkies.service.network.Resource;
 import com.tmd.talkies.service.repository.IMovieRepository;
 import com.tmd.talkies.service.repository.MovieRepositoryImpl;
@@ -25,7 +25,7 @@ public class MainViewModel extends AndroidViewModel {
         this.navigator = navigator;
     }
 
-    public LiveData<Resource<Movie>> getTopRatedMovie(String language, int pageNumber) {
+    public LiveData<Resource<MovieResponse>> getTopRatedMovie(String language, int pageNumber) {
         navigator.onStarted();
         return repository.getTopRatedMovie(language, pageNumber);
     }
