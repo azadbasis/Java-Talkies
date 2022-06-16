@@ -45,8 +45,7 @@ public class MoviesAdapter extends PagingDataAdapter<Movie,MoviesAdapter.MovieVi
      Movie currentMovie=getItem(position);
 
      if (currentMovie!=null){
-       //  glide.load(CDN_URL+currentMovie.getPosterPath()).into(holder.itemBinding.image);
-         Glide.with(context).load(CDN_URL+currentMovie.getPosterPath()).into(holder.itemBinding.image);
+         glide.load(CDN_URL+currentMovie.getPosterPath()).into(holder.itemBinding.image);
          holder.itemBinding.title.setText(String.valueOf(currentMovie.getVoteAverage()));
          holder.itemBinding.releaseDate.setText(currentMovie.getReleaseDate());
      }

@@ -27,9 +27,9 @@ import dagger.hilt.android.AndroidEntryPoint;
 
 @AndroidEntryPoint
 public class MainActivity extends BaseActivity<ActivityMainBinding> implements MainNavigator, MovieAdapter.MovieListener {
+
     @Inject
     RequestManager requestManager;
-
     private static final String TAG = "MainActivity";
     private MainViewModel viewModel;
     private MovieAdapter movieAdapter;

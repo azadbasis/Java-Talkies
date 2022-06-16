@@ -17,8 +17,9 @@
         android:theme="@style/Theme.TMDTalkies"
         tools:targetApi="31" >
         <activity
-            android:name=".DetailActivity"
-            android:exported="false" />
+            android:name=".view.detail.DetailActivity"
+            android:exported="false"
+           />
         <activity
             android:name="com.tmd.talkies.view.main.MainActivity"
             android:exported="true" >
