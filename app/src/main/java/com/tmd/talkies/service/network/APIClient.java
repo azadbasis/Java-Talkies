@@ -1,5 +1,6 @@
 package com.tmd.talkies.service.network;
 
+import static com.tmd.talkies.service.network.APIEndPoint.MOVIE_POPULAR;
 import static com.tmd.talkies.utils.AppConstants.BASE_URL;
 import static com.tmd.talkies.utils.ClientUtils.getHttpClientBuilder;
 
@@ -12,11 +13,11 @@ import retrofit2.converter.gson.GsonConverterFactory;
 import retrofit2.http.GET;
 import retrofit2.http.Query;
 
-public class HTTPClient {
+public class APIClient {
 
-    static HTTPInterface httpInterface;
-    public static HTTPInterface getHttpInterface(){
-        if (httpInterface==null){
+    static APIInterface APIInterface;
+    public static APIInterface getAPIInterface(){
+        if (APIInterface ==null){
             // Create retrofit instance
             Retrofit retrofit = new Retrofit.Builder()
                     .baseUrl(BASE_URL)
@@ -27,14 +28,15 @@ public class HTTPClient {
                     .addCallAdapterFactory(RxJava3CallAdapterFactory.create())
                     .build();
             // Init APIInterface
-            httpInterface = retrofit.create(HTTPInterface.class);
+            APIInterface = retrofit.create(APIInterface.class);
         }
-        return httpInterface;
+        return APIInterface;
     }
 
-    public interface HTTPInterface{
-        @GET("movie/popular")
+    public interface APIInterface {
+        @GET(MOVIE_POPULAR)
         Single<MovieResponse> getMoviesByPage(@Query("page") int page);
+        //<base_url>movie/<movie_id>
     }
 
 

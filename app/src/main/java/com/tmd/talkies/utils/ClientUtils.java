@@ -2,6 +2,8 @@ package com.tmd.talkies.utils;
 
 import static com.tmd.talkies.utils.AppConstants.API_KEY;
 
+import javax.inject.Inject;
+
 import okhttp3.HttpUrl;
 import okhttp3.Interceptor;
 import okhttp3.OkHttpClient;
@@ -9,6 +11,10 @@ import okhttp3.Request;
 import okhttp3.logging.HttpLoggingInterceptor;
 
 public class ClientUtils {
+    @Inject
+    public ClientUtils() {
+    }
+
     public static OkHttpClient getHttpClientBuilder() {
         HttpLoggingInterceptor loggingInterceptor = new HttpLoggingInterceptor()
                 .setLevel(HttpLoggingInterceptor.Level.BODY);

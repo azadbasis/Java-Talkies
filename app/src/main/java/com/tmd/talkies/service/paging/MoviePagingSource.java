@@ -5,7 +5,7 @@ import androidx.paging.PagingState;
 import androidx.paging.rxjava3.RxPagingSource;
 import com.tmd.talkies.service.model.Movie;
 import com.tmd.talkies.service.model.MovieResponse;
-import com.tmd.talkies.service.network.HTTPClient;
+import com.tmd.talkies.service.network.APIClient;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import java.util.List;
@@ -21,7 +21,7 @@ public class MoviePagingSource extends RxPagingSource<Integer, Movie> {
             // If page number is already there then init page variable with it otherwise we are loading fist page
             int page = loadParams.getKey() != null ? loadParams.getKey() : 1;
             // Send request to server with page number
-            return HTTPClient.getHttpInterface()
+            return APIClient.getAPIInterface()
                     .getMoviesByPage(page)
                     // Subscribe the result
                     .subscribeOn(Schedulers.io())

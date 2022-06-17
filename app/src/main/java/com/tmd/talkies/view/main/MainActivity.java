@@ -1,25 +1,18 @@
 package com.tmd.talkies.view.main;
 
-import androidx.annotation.NonNull;
-import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModelProvider;
-import androidx.recyclerview.widget.GridLayoutManager;
-
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.View;
+
+import androidx.annotation.NonNull;
+import androidx.lifecycle.ViewModelProvider;
+import androidx.recyclerview.widget.GridLayoutManager;
 
 import com.bumptech.glide.RequestManager;
 import com.tmd.talkies.databinding.ActivityMainBinding;
-import com.tmd.talkies.service.model.MovieResponse;
-import com.tmd.talkies.service.model.Movie;
-import com.tmd.talkies.service.network.Resource;
 import com.tmd.talkies.utils.MovieComparator;
 import com.tmd.talkies.utils.SpaceUtils;
 import com.tmd.talkies.view.base.BaseActivity;
-
-import java.util.List;
 
 import javax.inject.Inject;
 
