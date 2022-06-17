@@ -4,13 +4,16 @@ import static com.tmd.talkies.service.network.APIEndPoint.MOVIE_POPULAR;
 import static com.tmd.talkies.utils.AppConstants.BASE_URL;
 import static com.tmd.talkies.utils.ClientUtils.getHttpClientBuilder;
 
+import com.tmd.talkies.service.model.MovieDetailsResponse;
 import com.tmd.talkies.service.model.MovieResponse;
 
 import io.reactivex.rxjava3.core.Single;
+import retrofit2.Call;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava3.RxJava3CallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
 import retrofit2.http.GET;
+import retrofit2.http.Path;
 import retrofit2.http.Query;
 
 public class APIClient {
@@ -37,7 +40,8 @@ public class APIClient {
         @GET(MOVIE_POPULAR)
         Single<MovieResponse> getMoviesByPage(@Query("page") int page);
         //<base_url>movie/<movie_id>
+        @GET("movie/{movie_id}")
+        Call<MovieDetailsResponse> getMovieDetailsById(@Path("movie_id") int movieId);
     }
-
 
 }
