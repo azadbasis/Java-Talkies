@@ -1,25 +1,24 @@
 package com.tmd.talkies.view.main;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
-
 import androidx.annotation.NonNull;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.GridLayoutManager;
-
 import com.bumptech.glide.RequestManager;
 import com.tmd.talkies.databinding.ActivityMainBinding;
+import com.tmd.talkies.service.model.Movie;
 import com.tmd.talkies.utils.MovieComparator;
 import com.tmd.talkies.utils.SpaceUtils;
 import com.tmd.talkies.view.base.BaseActivity;
-
+import com.tmd.talkies.view.detail.DetailActivity;
 import javax.inject.Inject;
-
 import dagger.hilt.android.AndroidEntryPoint;
 
 @AndroidEntryPoint
-public class MainActivity extends BaseActivity<ActivityMainBinding>{
+public class MainActivity extends BaseActivity<ActivityMainBinding> implements MoviesAdapter.IMovieListener {
 
     private static final String TAG = "MainActivity";
     private MovieViewModel mainActivityViewModel;
@@ -40,7 +39,7 @@ public class MainActivity extends BaseActivity<ActivityMainBinding>{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Log.d(TAG, "requestManager: "+requestManager);
-        moviesAdapter = new MoviesAdapter(new MovieComparator(),requestManager);
+        moviesAdapter = new MoviesAdapter(new MovieComparator(),requestManager,this);
         mainActivityViewModel = new ViewModelProvider(this).get(MovieViewModel.class);
         initRecyclerviewAndAdapter();
         mainActivityViewModel.moviePagingDataFlowable.subscribe(moviePagingData -> {
@@ -75,4 +74,12 @@ public class MainActivity extends BaseActivity<ActivityMainBinding>{
         });
     }
 
+    @Override
+    public void listenMovieItem(Movie movie) {
+        Log.d(TAG, "listenMovieItem: "+movie.getId());
+        int movieId=movie.getId();
+        Intent intent=new Intent(MainActivity.this, DetailActivity.class);
+        intent.putExtra("movie_id",movieId);
+        startActivity(intent);
+    }
 }

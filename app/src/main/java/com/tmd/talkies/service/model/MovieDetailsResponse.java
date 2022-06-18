@@ -22,7 +22,7 @@ public class MovieDetailsResponse implements Serializable
     private String releaseDate;
     @SerializedName("vote_average")
     @Expose
-    private int voteAverage;
+    private Double voteAverage;
 
     public String getOriginalTitle() {
         return originalTitle;
@@ -56,11 +56,22 @@ public class MovieDetailsResponse implements Serializable
         this.releaseDate = releaseDate;
     }
 
-    public int getVoteAverage() {
+    public Double getVoteAverage() {
         return voteAverage;
     }
 
-    public void setVoteAverage(int voteAverage) {
+    public void setVoteAverage(Double voteAverage) {
         this.voteAverage = voteAverage;
+    }
+
+    @Override
+    public String toString() {
+        return "MovieDetailsResponse{" +
+                "originalTitle='" + originalTitle + '\'' +
+                ", overview='" + overview + '\'' +
+                ", posterPath='" + posterPath + '\'' +
+                ", releaseDate='" + releaseDate + '\'' +
+                ", voteAverage=" + voteAverage +
+                '}';
     }
 }

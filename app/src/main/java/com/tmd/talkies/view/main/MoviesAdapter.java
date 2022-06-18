@@ -28,16 +28,18 @@ public class MoviesAdapter extends PagingDataAdapter<Movie,MoviesAdapter.MovieVi
     public static final int MOVIE_ITEM=1;
     RequestManager glide;
     private Context context;
-    public MoviesAdapter(@NonNull DiffUtil.ItemCallback<Movie> diffCallback,  RequestManager glide) {
+    private IMovieListener movieListener;
+    public MoviesAdapter(@NonNull DiffUtil.ItemCallback<Movie> diffCallback,  RequestManager glide,IMovieListener movieListener) {
         super(diffCallback);
         this.glide=glide;
+        this.movieListener=movieListener;
     }
 
     @NonNull
     @Override
     public MovieViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         context=parent.getContext();
-        return new MovieViewHolder(MovieItemBinding.inflate(LayoutInflater.from(parent.getContext()),parent,false));
+        return new MovieViewHolder(MovieItemBinding.inflate(LayoutInflater.from(parent.getContext()),parent,false),movieListener);
     }
 
     @Override
@@ -56,11 +58,23 @@ public class MoviesAdapter extends PagingDataAdapter<Movie,MoviesAdapter.MovieVi
         return position==getItemCount()?MOVIE_ITEM:LOADING_ITEM;
     }
 
-    public class MovieViewHolder extends RecyclerView.ViewHolder {
+    public class MovieViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         MovieItemBinding itemBinding;
-        public MovieViewHolder(@NonNull  MovieItemBinding itemBinding) {
+        IMovieListener movieListener;
+        public MovieViewHolder(@NonNull  MovieItemBinding itemBinding, IMovieListener movieListener) {
             super(itemBinding.getRoot());
             this.itemBinding=itemBinding;
+            this.movieListener=movieListener;
+            this.itemBinding.getRoot().setOnClickListener(this);
+        }
+
+        @Override
+        public void onClick(View view) {
+            movieListener.listenMovieItem(getItem(getAdapterPosition()));
         }
     }
+    public interface IMovieListener {
+        void listenMovieItem(Movie movie);
+    }
+
 }
